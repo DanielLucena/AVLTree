@@ -10,7 +10,7 @@ int main(int argc, char const *argv[])
     tree.insert(root, 1);
     tree.insert(root, 60);
     tree.insert(root,80);
-     //std::cout << root->right->key << std::endl;
+    tree.insert(root, 100);
 
     tree.deleteTree(root); 
     return 0;

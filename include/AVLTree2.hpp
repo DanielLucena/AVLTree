@@ -42,19 +42,18 @@ void deleteTree(node* no)
 int height(AVLTree::node *n){
 
     int r, l, h = 0;
-    if(n->left != nullptr && n->right != nullptr){
-        
-        std::cout<<n->right->key;
+    if(n != nullptr)
+    {
         l= height(n->left) + 1;
-        r = height(n->right) +1 ;
+        r= height(n->right) + 1;
                 
         if(l > r){
-            return l;
+           h = l;
         }else{
-            return r;
+            h = r;
         }
     }
-    //fixme
+
     return h;
 }
 
@@ -63,7 +62,7 @@ AVLTree::node* newNode(int key){
     no->key = key;
     no->left = nullptr;
     no->right = nullptr;
-    no->height = 1;
+    no->height = height(no);
     return no;
 }   
 
@@ -79,15 +78,19 @@ AVLTree::node* leftRotate(AVLTree::node* x){
 
 int getBalance(AVLTree::node* n){
     
-    int bal;
-    if(n == nullptr){
-        bal = 0;
-    }else{
-        bal = n->right - n->left;
-    }
-    return bal;
-    //fixme
+    int hl, hr;
 
+    if(n == nullptr) return 0;
+
+    if(n->right == nullptr) hr = 0;
+    else hr = n->right->height; 
+
+
+    if(n->left == nullptr) hl = 0;
+    else hl = n->left->height;
+    
+    return (hr - hl);
+    //fixme
 }
 
 void balanceTree(AVLTree::node* n){
@@ -121,7 +124,6 @@ AVLTree::node* minValueNode(AVLTree::node* n){
 
 //funcoes publicas
 AVLTree::node* insert(AVLTree::node* n, int key){
-    AVLTree::node* ptr = nullptr;
     if(n == nullptr){
        return newNode(key);
     }
@@ -132,25 +134,22 @@ AVLTree::node* insert(AVLTree::node* n, int key){
 
     if(key < n->key){
         n->left = insert(n->left, key);
-        //std::cout<<n->left->key;
     }else if(key > n->key){
         n->right = insert(n->right, key);
-        //std::cout<<n->left->key;
     }
 
     n->height = height(n);
-    std::cout<<n->height;
 
-
-    if(ptr!=nullptr){
-      // int bal = getBalance(n);
-        
-                
-      /*  if(abs(bal) > 1){
-           balanceTree(n);
-        }*/
-
+    int bal = getBalance(n);
+    std::cout<<"no: "<< n->key << " | balanço: " << bal;
+ 
+    //se a arvore estiver desbalanceada chama a função para balancear
+    if(abs(bal)>1){ 
+        std::cout<<" | balancear no "<< n->key;
+        balanceTree(n);
     }
+
+    std::cout<<"\n";
 
     return n;
 }
