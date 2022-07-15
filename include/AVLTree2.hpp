@@ -1,24 +1,57 @@
-
+#ifndef AVLTree2_h
+#define AVLTree2_h
 #include <iostream>
-#include <AVLTree.h>
-/*
-int AVLTree::max(int a, int b){
-    //fixme
-    return 0;
+
+
+
+class AVLTree{
+    public:
+
+        struct node
+        {
+        int key;
+        node* left = nullptr;
+        node* right = nullptr;
+        int height;
+        };
+
+        struct node* root=nullptr;
+        /**
+         * @brief retorna o maior valor entre os dois inteiros passados
+         * 
+         * @param a 
+         * @param b 
+         * @return int do maior valor entre os dois passados
+         */
+
+ //~AVLTree() {deleteTree(root);}
+
+void deleteTree(node* no)
+{
+        if(no->left!=nullptr){
+            deleteTree(no->left);
+        }
+
+        if(no->right!=nullptr){
+            deleteTree(no->right);
+        }
+            delete no;
 }
+
 
 int height(AVLTree::node *n){
 
     int r, l, h = 0;
     if(n->left != nullptr && n->right != nullptr){
         
-        l= height(n->left);
-        r = height(n->right);
+        std::cout<<n->right->key;
+        l= height(n->left) + 1;
+        r = height(n->right) +1 ;
                 
         if(l > r){
-            h = l + 1;
+            return l;
         }else{
-            h = r + 1;
+            return r;
         }
     }
     //fixme
@@ -26,7 +59,7 @@ int height(AVLTree::node *n){
 }
 
 AVLTree::node* newNode(int key){
-    AVLTree::node* no;
+    AVLTree::node* no{new node};
     no->key = key;
     no->left = nullptr;
     no->right = nullptr;
@@ -34,14 +67,14 @@ AVLTree::node* newNode(int key){
     return no;
 }   
 
-AVLTree::node* AVLTree::rightRotate(AVLTree::node* y){
+AVLTree::node* rightRotate(AVLTree::node* y){
     //fixme
-    return NULL;
+    return nullptr;
 }
 
-AVLTree::node* AVLTree::leftRotate(AVLTree::node* x){
+AVLTree::node* leftRotate(AVLTree::node* x){
     //fixme
-    return NULL;
+    return nullptr;
 }
 
 int getBalance(AVLTree::node* n){
@@ -79,9 +112,9 @@ void balanceTree(AVLTree::node* n){
     }
 }
 
-AVLTree::node* AVLTree::minValueNode(AVLTree::node* n){
+AVLTree::node* minValueNode(AVLTree::node* n){
     //fixme
-    return NULL;
+    return nullptr;
 }
 
 
@@ -90,7 +123,7 @@ AVLTree::node* AVLTree::minValueNode(AVLTree::node* n){
 AVLTree::node* insert(AVLTree::node* n, int key){
     AVLTree::node* ptr = nullptr;
     if(n == nullptr){
-        return newNode(key);
+       return newNode(key);
     }
 
     if(n->key == key){
@@ -98,20 +131,24 @@ AVLTree::node* insert(AVLTree::node* n, int key){
     }
 
     if(key < n->key){
-        ptr = insert(n->left, key);
+        n->left = insert(n->left, key);
+        //std::cout<<n->left->key;
     }else if(key > n->key){
-        ptr = insert(n->right, key);
+        n->right = insert(n->right, key);
+        //std::cout<<n->left->key;
     }
 
     n->height = height(n);
+    std::cout<<n->height;
+
 
     if(ptr!=nullptr){
-       int bal = getBalance(n);
+      // int bal = getBalance(n);
         
                 
-        if(abs(bal) > 1){
+      /*  if(abs(bal) > 1){
            balanceTree(n);
-        }
+        }*/
 
     }
 
@@ -125,13 +162,17 @@ bool search(AVLTree::node* n, int key){
 
 AVLTree::node* deleteNode(AVLTree::node* n, int key){
     //fixme
-    return NULL;
+    return nullptr;
 }
 
 void preOrder(AVLTree::node* n){
-    if(n != NULL){
-        std::cout << n->key << " ";
+    if(n != nullptr){
+       // std::cout << n->key << " ";
         preOrder(n->left);
         preOrder(n->right);
     }
-}*/
+}
+
+};
+
+#endif //AVLTree_h

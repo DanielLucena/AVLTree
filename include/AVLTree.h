@@ -15,8 +15,6 @@ class AVLTree{
         };
 
         struct node* root;
-
-    private:
         /**
          * @brief retorna o maior valor entre os dois inteiros passados
          * 
@@ -32,6 +30,7 @@ class AVLTree{
          * @param n ponteiro para o node
          * @return int da altura do node
          */
+    public:
         int height(node *n);
 
         /**
@@ -67,16 +66,20 @@ class AVLTree{
         int getbalance(node* n);
 
         /**
+         * @brief realiza o balanceamento da arvore
+         * 
+         * @param n ponteiro para o node
+         * @return void
+         */
+        void balanceTree(node* n);
+
+        /**
          * @brief 
          * 
          * @param n ponteiro para o node raiz
          * @return node* do node de menor valor da arvore
          */
         struct node* minValueNode(node* n);
-
-
-
-    public:
 
         /**
          * @brief 

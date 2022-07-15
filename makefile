@@ -3,7 +3,7 @@
 #quando adicionar uma nova dependencia não esqueça de atualizar aqui!
 OBJECTS= build/AVLTree.o
 
-build/AVLTree.o: src/AVLTree.cpp include/AVLTree.h 
+build/AVLTree.o: src/AVLTree.cpp include/AVLTree2.hpp
 	g++ -Iinclude src/AVLTree.cpp -c -o build/AVLTree.o
 
 #para adicionar novas regras apenas siga o formato

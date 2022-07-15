@@ -1,9 +1,17 @@
-#include "AVLTree.h"
+#include "AVLTree2.hpp"
 
 #include <iostream>
 
+
 int main(int argc, char const *argv[])
 {
-    std::cout << "Hello AVLTree!" << std::endl;
+    AVLTree tree;
+    AVLTree::node* root = tree.insert(nullptr, 5);
+    tree.insert(root, 1);
+    tree.insert(root, 60);
+    tree.insert(root,80);
+     //std::cout << root->right->key << std::endl;
+
+    tree.deleteTree(root); 
     return 0;
 }
