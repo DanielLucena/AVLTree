@@ -40,7 +40,7 @@ class AVLTree{
          * @param key valor do novo node que sera criado
          * @return node* do node criado
          */
-        struct node* newnode(int key);
+        struct node* newNode(int key);
 
         /**
          * @brief 
