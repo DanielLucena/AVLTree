@@ -14,12 +14,12 @@ int AVLTree::height(AVLTree::node *n){
 }
 
 AVLTree::node* AVLTree::newNode(int key){
-    node newNode;
+    node* newNode;
     newNode->key = key;
     newNode->left = nullptr;
     newNode->right = nullptr;
     newNode->height = 1;
-    return newNode;
+    return (newNode);
 }   
 
 AVLTree::node* AVLTree::rightRotate(AVLTree::node* y){
