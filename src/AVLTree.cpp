@@ -1,6 +1,7 @@
 #include "AVLTree.h"
 
 #include <iostream>
+#include <string.h>
 
 //funcoes privadas
 
@@ -206,7 +207,7 @@ AVLTree::node* AVLTree::insert(AVLTree::node* n, int key){
     }
 
     if(n->key == key){
-        return nullptr;
+        return n;
     }
 
     if(key < n->key){
@@ -308,14 +309,48 @@ void AVLTree::preOrder(AVLTree::node* n){
     }
 }
 
-void AVLTree::printTree(AVLTree::node* n, int space){
+void AVLTree::printTree(AVLTree::node* n, int space, char s){
+    
     if(n == NULL){
         return;
     }
-    printTree(n->right, space+5);
-    for(int i=0; i<space; i++){
+    
+    
+    printTree(n->right, space+5, 'r');
+
+    if(s=='l')
+    {
+        for(int i=0; i<space-1; i++){
         std::cout<<" ";
+        }
+        std::cout<<"\\"<<"\n";
+
+        for(int i=0; i<space; i++){
+        std::cout<<" ";
+        }
+        std::cout<<n->key<<"\n";
     }
-    std::cout<<n->key<<"\n";
-    printTree(n->left, space+5);
+
+    if(s=='r')
+    {
+        for(int i=0; i<space; i++){
+        std::cout<<" ";
+        }
+        std::cout<<n->key<<"\n";
+
+        for(int i=0; i<space-1; i++){
+        std::cout<<" ";
+        }
+        std::cout<<"/"<<"\n";
+    }
+
+
+    if(s=='0')
+    {
+        std::cout<<n->key<<"\n";
+    }
+   
+
+    printTree(n->left, space+4, 'l');
+
 }

@@ -24,7 +24,7 @@ int main(int argc, char const *argv[])
             root = tree.deleteNode(root, value);
         }
         else if(command == "print"){
-            tree.printTree(root,0);
+            tree.printTree(root,0, '0');
             std::cout << std::endl;
         }
         else if(command == "exit"){
