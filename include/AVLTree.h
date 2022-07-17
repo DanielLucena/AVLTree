@@ -123,7 +123,7 @@ class AVLTree{
          */
         void preOrder(node* n);
 
-        void balanceTree(node* n);
+        struct node* balanceTree(node* n);
 
 };
 

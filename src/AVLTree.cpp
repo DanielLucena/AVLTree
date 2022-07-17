@@ -49,13 +49,15 @@ AVLTree::node* AVLTree::newNode(int key){
 
 AVLTree::node* AVLTree::rightRotate(AVLTree::node* y){
     AVLTree::node *ptu=y->left;
-    if (ptu->height=-1){
-        y->left=ptu->right;
+    if (ptu!=nullptr){
+        if(ptu->right!=nullptr) y->left = ptu->right;
+        else y->left = nullptr;
         ptu->right=y;
-        y->height=0;
         y=ptu;
+        ptu->height = height(ptu);
+        y->height = height(y);
     }
-    else{
+   /* else{
         AVLTree::node *ptv=ptu->right;
         ptu->right=ptv->left;
         ptv->left=ptu;
@@ -79,7 +81,7 @@ AVLTree::node* AVLTree::rightRotate(AVLTree::node* y){
         y=ptv; 
     }
 
-    y->height=0;
+    y->height=0;*/
     
     return y;
     
@@ -87,7 +89,19 @@ AVLTree::node* AVLTree::rightRotate(AVLTree::node* y){
 
 AVLTree::node* AVLTree::leftRotate(AVLTree::node* x){
     AVLTree::node *ptu=x->right;
-    if (ptu->height=1){
+    std::cout<<"antes"<< x->key<<"\n";
+   
+    if(ptu!=nullptr){
+        if(ptu->left != nullptr) x->right=ptu->left;
+        else x->right = nullptr;
+        ptu->left=x;
+        x=ptu;
+        x->height = height(x);
+        ptu->height = height(ptu);
+    }
+
+    std::cout<<"depois"<< x->key<<"\n";
+    /*if (ptu->height=1){
         x->right=ptu->left;
         ptu->left=x;
         x->height=0;
@@ -117,7 +131,7 @@ AVLTree::node* AVLTree::leftRotate(AVLTree::node* x){
         x=ptv; 
     }
 
-    x->height=0;
+    x->height=0;*/
     
     return x;
 }
@@ -138,26 +152,36 @@ int AVLTree::getbalance(AVLTree::node* n){
     return (hr - hl);
 }
 
-void AVLTree::balanceTree(AVLTree::node* n){
+AVLTree::node* AVLTree::balanceTree(AVLTree::node* n){
 
     int bal = getbalance(n);
     int l = getbalance(n->left);
     int r = getbalance(n->right);
             
     if(bal >= 2 && r >=0){
+        n = leftRotate(n);
+        std::cout<< n->key << "\n";
+        std:: cout << n->right->key << "\n";
+        std:: cout << n->left->key << "\n";
         //rotaciona no para a esquerda
     }
     if(bal >= 2 && r < 0){
+        n -> right = rightRotate(n->right);
+        n = leftRotate(n);
         //rotaciona no->dir para direita
         //rotaciona no para a esquerda
     }
     if(bal <=-2 && l <=0 ){
+        n = rightRotate(n);
         //rotaciona no para direita
     }
     if(bal <=-2 && l > 0 ){
+        n -> left = leftRotate(n->left);
+        n = rightRotate(n);
         //rotaciona no->esq para esquerda
         //rotaciona no para direita
     }
+    return n;
 }
 
 AVLTree::node* AVLTree::minValueNode(AVLTree::node* n){
@@ -192,7 +216,8 @@ AVLTree::node* AVLTree::insert(AVLTree::node* n, int key){
     //se a arvore estiver desbalanceada chama a função para balancear
     if(abs(bal)>1){ 
         std::cout<<" | balancear no "<< n->key;
-        balanceTree(n);
+        n = balanceTree(n);
+         std::cout<<"depois do balanço"<< n->key<<"\n";
     }
 
     std::cout<<"\n";
