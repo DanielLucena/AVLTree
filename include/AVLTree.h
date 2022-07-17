@@ -72,7 +72,7 @@ class AVLTree{
          * @param n ponteiro para o node raiz
          * @return node* do node de menor valor da arvore
          */
-        struct node* minValueNode(node* n);
+        static struct node* minValueNode(node* n);
 
 
 
@@ -104,7 +104,7 @@ class AVLTree{
          * @param key valor que sera removido da arvore
          * @return node* a nova raiz da arvore
          */
-        struct node* deleteNode(node* n, int key);
+        struct node* deleteNode(AVLTree::node* n, int key);
 
 
         /**

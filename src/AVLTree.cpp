@@ -17,8 +17,12 @@ void AVLTree::deleteTree(AVLTree::node* no)
 }
 
 int AVLTree::max(int a, int b){
-    //fixme
-    return 0;
+    if(a > b){
+        return a;
+    }
+    else{
+        return b;
+    }
 }
 
 int AVLTree::height(AVLTree::node *n){
@@ -95,9 +99,12 @@ void AVLTree::balanceTree(AVLTree::node* n){
     }
 }
 
-AVLTree::node* AVLTree::minValueNode(AVLTree::node* n){
-    //fixme
-    return NULL;
+AVLTree::node *AVLTree::minValueNode(AVLTree::node* n){
+    node* current = n;
+    while(current->left != NULL){
+        current = current->left;
+    }
+    return current;
 }
 
 
@@ -140,12 +147,58 @@ bool search(AVLTree::node* n, int key){
     return false;
 }
 
-AVLTree::node* deleteNode(AVLTree::node* n, int key){
-    //fixme
-    return NULL;
+AVLTree::node* AVLTree::deleteNode(AVLTree::node* n, int key){
+    //teste se a raiz esta vazia
+    if(n == NULL){
+        return NULL;
+    }
+
+    //procura o no a ser deletado
+    if(key < n->key){
+        n->left = deleteNode(n->left, key);
+    }
+    else if(key > n->key){
+        n->right = deleteNode(n->right, key);
+    }
+
+    //se o key é igual ao n-> key entao o no que deve ser deletado foi encontrado
+    else{
+        //se o no a ser deletado nao tem filhos ou tem apenas um filho
+        if(n->left == NULL || n->right == NULL){
+            AVLTree::node* temp = n->left ? n->left : n->right;
+            //se o no a ser deletado nao tem filho
+            if(temp == NULL){
+                temp = n;
+                n = NULL;
+            }
+            //se o no a ser deletado tem um filho
+            else{
+                *n = *temp;
+            }
+            delete temp;
+        }
+        else{
+            //no com 2 filhos
+            //procura o no que substituira o no a ser deletado
+            AVLTree::node *temp = AVLTree::minValueNode(n->right);
+
+            //copia o valor do no a ser deletado para o no que substituira
+            n->key = temp->key;
+
+            //delete o no que substituira
+            n->right = deleteNode(n->right, temp->key);
+        }
+    }
+
+    if(n == NULL){
+        return n;
+    }
+
+    //std::cout << "delete: " << n->key << "\n";
+    return n;
 }
 
-void preOrder(AVLTree::node* n){
+void AVLTree::preOrder(AVLTree::node* n){
     if(n != NULL){
         std::cout << n->key << " ";
         preOrder(n->left);
