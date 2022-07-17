@@ -9,7 +9,7 @@ int main(int argc, char const *argv[])
     std::cout << "Digite um comando (insert, delete. print, exit): ";
     AVLTree tree;
     AVLTree::node* root = nullptr;
-    root = tree.insert(root, 10);
+    //root = tree.insert(root, 10);
     std::string command;
     while(true){
         std::cin >> command;
@@ -18,13 +18,20 @@ int main(int argc, char const *argv[])
             std::cin >> value;
             root = tree.insert(root, value);
         }
+        else if(command == "search"){
+            int value;
+            std::cin >> value;
+            tree.search(root, value)? 
+            std::cout << value << " is in the Tree" << std::endl :
+            std::cout << value << " isn't in the Tree" << std::endl;
+        }
         else if(command == "delete"){
             int value;
             std::cin >> value;
             root = tree.deleteNode(root, value);
         }
         else if(command == "print"){
-            tree.printTree(root,0, '0');
+            tree.printTree(root,0, '0', 0);
             std::cout << std::endl;
         }
         else if(command == "exit"){

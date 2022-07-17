@@ -234,12 +234,16 @@ AVLTree::node* AVLTree::insert(AVLTree::node* n, int key){
 }
 
 bool AVLTree::search(AVLTree::node* n, int key){
+    if(n == nullptr){
+        return false;
+    }
+
     node * l = n->left;
     node * r = n->right;
     bool existKey{false};
-   
+       
     if(n!=nullptr){
-        if(n->key = key){
+        if(n->key == key){
             existKey = true;
         }else if(n->key < key){
            existKey = search(n->right, key);
@@ -297,6 +301,22 @@ AVLTree::node* AVLTree::deleteNode(AVLTree::node* n, int key){
         return n;
     }
 
+    //atualiza a altura do no atual
+    root-> height = height(n);
+
+    //checa balanceamento do no atual
+    int bal = getbalance(n);
+    std::cout<<"no: "<< n->key << " | balanço: " << bal;
+
+    //se a arvore estiver desbalanceada chama a função para balancear
+    if(abs(bal)>1){ 
+        std::cout<<" | balancear no "<< n->key;
+        n = balanceTree(n);
+         std::cout<<"depois do balanço"<< n->key<<"\n";
+    }
+
+    std::cout<<"\n";
+
     //std::cout << "delete: " << n->key << "\n";
     return n;
 }
@@ -309,14 +329,14 @@ void AVLTree::preOrder(AVLTree::node* n){
     }
 }
 
-void AVLTree::printTree(AVLTree::node* n, int space, char s){
+void AVLTree::printTree(AVLTree::node* n, int space, char s, int parentKey){
     
     if(n == NULL){
         return;
     }
     
     
-    printTree(n->right, space+5, 'r');
+    printTree(n->right, space+5, 'r', n->key);
 
     if(s=='l')
     {
@@ -328,7 +348,8 @@ void AVLTree::printTree(AVLTree::node* n, int space, char s){
         for(int i=0; i<space; i++){
         std::cout<<" ";
         }
-        std::cout<<n->key<<"\n";
+        std::cout << n->key << "\n";
+        //std::cout << "(" << parentKey << ")" << n->key << "\n";
     }
 
     if(s=='r')
@@ -336,7 +357,8 @@ void AVLTree::printTree(AVLTree::node* n, int space, char s){
         for(int i=0; i<space; i++){
         std::cout<<" ";
         }
-        std::cout<<n->key<<"\n";
+        std::cout << n->key << "\n";
+        //std::cout << "(" << parentKey << ")" <<n->key << "\n";
 
         for(int i=0; i<space-1; i++){
         std::cout<<" ";
@@ -351,6 +373,6 @@ void AVLTree::printTree(AVLTree::node* n, int space, char s){
     }
    
 
-    printTree(n->left, space+4, 'l');
+    printTree(n->left, space+5, 'l', n->key);
 
 }

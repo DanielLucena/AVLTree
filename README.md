@@ -16,6 +16,11 @@ apartir da pasta raiz.
 ```bash
 ./buil/main
 ```
+## Rodar arquivo de teste
+apartir da pasta raiz.
+```
+./build/main < data/teste.txt
+```
 
 ## Limitações
 <br><br>
