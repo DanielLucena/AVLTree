@@ -142,7 +142,7 @@ AVLTree::node* AVLTree::insert(AVLTree::node* n, int key){
     return n;
 }
 
-bool search(AVLTree::node* n, int key){
+bool AVLTree::search(AVLTree::node* n, int key){
     //fixme
     return false;
 }
@@ -204,4 +204,16 @@ void AVLTree::preOrder(AVLTree::node* n){
         preOrder(n->left);
         preOrder(n->right);
     }
+}
+
+void AVLTree::printTree(AVLTree::node* n, int space){
+    if(n == NULL){
+        return;
+    }
+    printTree(n->right, space+5);
+    for(int i=0; i<space; i++){
+        std::cout<<" ";
+    }
+    std::cout<<n->key<<"\n";
+    printTree(n->left, space+5);
 }

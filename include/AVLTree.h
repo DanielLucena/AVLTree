@@ -125,6 +125,8 @@ class AVLTree{
 
         void balanceTree(node* n);
 
+        void printTree(node* n, int space);
+
 };
 
 #endif //AVLTree_h
