@@ -7,6 +7,8 @@
 
 void AVLTree::deleteTree(AVLTree::node* no)
 {
+    if(no!=nullptr)
+    {
         if(no->left!=nullptr){
             deleteTree(no->left);
         }
@@ -14,7 +16,9 @@ void AVLTree::deleteTree(AVLTree::node* no)
         if(no->right!=nullptr){
             deleteTree(no->right);
         }
+
             delete no;
+    }
 }
 
 int AVLTree::max(int a, int b){
@@ -62,31 +66,6 @@ AVLTree::node* AVLTree::rightRotate(AVLTree::node* y){
         ptu->height = height(ptu);
         y->height = height(y);
     }
-   /* else{
-        AVLTree::node *ptv=ptu->right;
-        ptu->right=ptv->left;
-        ptv->left=ptu;
-        y->left=ptv->right;
-        ptv->right=y;
-        
-        if (ptv->height=-1){
-
-            y->height=1;
-        }else{
-
-            y->height=0;
-        }
-
-        if (ptv->height=1){
-
-            ptu->height=-1;
-        }else{
-            ptu->height=0;
-        }
-        y=ptv; 
-    }
-
-    y->height=0;*/
     
     return y;
     
@@ -94,7 +73,6 @@ AVLTree::node* AVLTree::rightRotate(AVLTree::node* y){
 
 AVLTree::node* AVLTree::leftRotate(AVLTree::node* x){
     AVLTree::node *ptu=x->right;
-    std::cout<<"antes"<< x->key<<"\n";
    
     if(ptu!=nullptr){
         if(ptu->left != nullptr) x->right=ptu->left;
@@ -105,38 +83,6 @@ AVLTree::node* AVLTree::leftRotate(AVLTree::node* x){
         ptu->height = height(ptu);
     }
 
-    std::cout<<"depois"<< x->key<<"\n";
-    /*if (ptu->height=1){
-        x->right=ptu->left;
-        ptu->left=x;
-        x->height=0;
-        x=ptu;
-    }
-    else{
-        AVLTree::node *ptv=ptu->left;
-        ptu->left=ptv->right;
-        ptv->right=ptu;
-        x->right=ptv->left;
-        ptv->left=x;
-        
-        if (ptv->height=1){
-
-            x->height=-1;
-        }else{
-
-            x->height=0;
-        }
-
-        if (ptv->height=-1){
-
-            ptu->height=1;
-        }else{
-            ptu->height=0;
-        }
-        x=ptv; 
-    }
-
-    x->height=0;*/
     
     return x;
 }
@@ -165,9 +111,6 @@ AVLTree::node* AVLTree::balanceTree(AVLTree::node* n){
             
     if(bal >= 2 && r >=0){
         n = leftRotate(n);
-        std::cout<< n->key << "\n";
-        std:: cout << n->right->key << "\n";
-        std:: cout << n->left->key << "\n";
         //rotaciona no para a esquerda
     }
     if(bal >= 2 && r < 0){
@@ -219,16 +162,12 @@ AVLTree::node* AVLTree::insert(AVLTree::node* n, int key){
     n->height = height(n);
 
     int bal = getbalance(n);
-    std::cout<<"no: "<< n->key << " | balanço: " << bal;
  
     //se a arvore estiver desbalanceada chama a função para balancear
     if(abs(bal)>1){ 
-        std::cout<<" | balancear no "<< n->key;
         n = balanceTree(n);
-         std::cout<<"depois do balanço"<< n->key<<"\n";
     }
 
-    std::cout<<"\n";
 
     return n;
 }
@@ -256,8 +195,8 @@ bool AVLTree::search(AVLTree::node* n, int key){
 
 AVLTree::node* AVLTree::deleteNode(AVLTree::node* n, int key){
     //teste se a raiz esta vazia
-    if(n == NULL){
-        return NULL;
+    if(n == nullptr){
+        return nullptr;
     }
 
     //procura o no a ser deletado
@@ -302,28 +241,21 @@ AVLTree::node* AVLTree::deleteNode(AVLTree::node* n, int key){
     }
 
     //atualiza a altura do no atual
-    root-> height = height(n);
+    n-> height = height(n);
 
     //checa balanceamento do no atual
     int bal = getbalance(n);
-    std::cout<<"no: "<< n->key << " | balanço: " << bal;
 
     //se a arvore estiver desbalanceada chama a função para balancear
     if(abs(bal)>1){ 
-        std::cout<<" | balancear no "<< n->key;
         n = balanceTree(n);
-         std::cout<<"depois do balanço"<< n->key<<"\n";
     }
 
-    std::cout<<"\n";
-
-    //std::cout << "delete: " << n->key << "\n";
     return n;
 }
 
 void AVLTree::preOrder(AVLTree::node* n){
     if(n != NULL){
-        std::cout << n->key << " ";
         preOrder(n->left);
         preOrder(n->right);
     }
