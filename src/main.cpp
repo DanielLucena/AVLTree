@@ -6,7 +6,7 @@
 int main(int argc, char const *argv[])
 {
     std::cout << "Hello AVLTree!" << std::endl;
-    std::cout << "Digite um comando (insert, delete. print, exit): ";
+    std::cout << "Digite um comando (insert, search, delete, print, exit): ";
     AVLTree tree;
     AVLTree::node* root = nullptr;
     //root = tree.insert(root, 10);
@@ -31,6 +31,7 @@ int main(int argc, char const *argv[])
             root = tree.deleteNode(root, value);
         }
         else if(command == "print"){
+            std::cout << "Print: " << std::endl;
             tree.printTree(root,0, '0', 0);
             std::cout << std::endl;
         }
