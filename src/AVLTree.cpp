@@ -23,13 +23,78 @@ AVLTree::node* AVLTree::newNode(int key){
 }   
 
 AVLTree::node* AVLTree::rightRotate(AVLTree::node* y){
-    //fixme
-    return NULL;
+    AVLTree::node *ptu=y->left;
+    if (ptu->height=-1){
+        y->left=ptu->right;
+        ptu->right=y;
+        y->height=0;
+        y=ptu;
+    }
+    else{
+        AVLTree::node *ptv=ptu->right;
+        ptu->right=ptv->left;
+        ptv->left=ptu;
+        y->left=ptv->right;
+        ptv->right=y;
+        
+        if (ptv->height=-1){
+
+            y->height=1;
+        }else{
+
+            y->height=0;
+        }
+
+        if (ptv->height=1){
+
+            ptu->height=-1;
+        }else{
+            ptu->height=0;
+        }
+        y=ptv; 
+    }
+
+    y->height=0;
+    
+    return y;
+    
 }
 
 AVLTree::node* AVLTree::leftRotate(AVLTree::node* x){
-    //fixme
-    return NULL;
+    AVLTree::node *ptu=x->right;
+    if (ptu->height=1){
+        x->right=ptu->left;
+        ptu->left=x;
+        x->height=0;
+        x=ptu;
+    }
+    else{
+        AVLTree::node *ptv=ptu->left;
+        ptu->left=ptv->right;
+        ptv->right=ptu;
+        x->right=ptv->left;
+        ptv->left=x;
+        
+        if (ptv->height=1){
+
+            x->height=-1;
+        }else{
+
+            x->height=0;
+        }
+
+        if (ptv->height=-1){
+
+            ptu->height=1;
+        }else{
+            ptu->height=0;
+        }
+        x=ptv; 
+    }
+
+    x->height=0;
+    
+    return x;
 }
 
 int AVLTree::getbalance(AVLTree::node* n){
