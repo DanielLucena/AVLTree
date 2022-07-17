@@ -233,8 +233,20 @@ AVLTree::node* AVLTree::insert(AVLTree::node* n, int key){
 }
 
 bool AVLTree::search(AVLTree::node* n, int key){
-    //fixme
-    return false;
+    node * l = n->left;
+    node * r = n->right;
+    bool existKey{false};
+   
+    if(n!=nullptr){
+        if(n->key = key){
+            existKey = true;
+        }else if(n->key < key){
+           existKey = search(n->right, key);
+        }else if(n->key >key){
+           existKey = search(n->left, key);
+        }
+    }
+    return existKey;
 }
 
 AVLTree::node* AVLTree::deleteNode(AVLTree::node* n, int key){
