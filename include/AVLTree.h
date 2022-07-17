@@ -16,7 +16,7 @@ class AVLTree{
 
         struct node* root;
 
-    private:
+    public:
         /**
          * @brief retorna o maior valor entre os dois inteiros passados
          * 
@@ -106,12 +106,24 @@ class AVLTree{
          */
         struct node* deleteNode(node* n, int key);
 
+
+        /**
+         * @brief 
+         * 
+         * @param n ponteiro para o node raiz
+         * @param key valor que sera removido da arvore
+         * @return node* a nova raiz da arvore
+         */
+        void deleteTree(node* n);
+
         /**
          * @brief imprime os valores da arvore apartir da raiz
          * 
          * @param n ponteiro para o node raiz
          */
         void preOrder(node* n);
+
+        void balanceTree(node* n);
 
 };
 
