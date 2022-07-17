@@ -1,4 +1,5 @@
 # AVLTree
+[Link do Repositorio](https://github.com/DanielLucena/AVLTree)
 ## Descrição
 O trabalho da 3a unidade consiste simplesmente na implementação de uma árvore AVL com suas operações padrão: busca, inserção e remoção.
 <br><br>
@@ -18,12 +19,19 @@ apartir da pasta raiz.
 ```
 ## Rodar arquivo de teste
 apartir da pasta raiz.
-```
+```bash
 ./build/main < data/teste.txt
+```
+```bash
+./build/main < data/deleteSemfilhos.txt
+```
+```bash
+./build/main < data/deleteUmfilho.txt
+```
+```bash
+./build/main < data/deleteDoisfilho.txt
 ```
 
 ## Limitações
-<br><br>
-
-## Funcionalidades não Implementadas
+O print da arvore está na horizontal, o valor mais a esquerda é a raiz. Os valores mais a direita são os nós folhas.
 <br><br>

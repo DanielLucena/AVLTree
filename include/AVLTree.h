@@ -108,11 +108,9 @@ class AVLTree{
 
 
         /**
-         * @brief 
+         * @brief deleta a arvore
          * 
          * @param n ponteiro para o node raiz
-         * @param key valor que sera removido da arvore
-         * @return node* a nova raiz da arvore
          */
         void deleteTree(node* n);
 
@@ -123,8 +121,20 @@ class AVLTree{
          */
         void preOrder(node* n);
 
+        /**
+         * @brief balancei a subarvore apartir do node passado como parametro
+         * 
+         * @param n ponteiro para o node raiz
+         */
         struct node* balanceTree(node* n);
-
+        
+        /**
+         * @brief printa a arvore horizontalmente apartir do no raiz
+         * @param n ponteiro para o node raiz
+         * @param space quantidade de espaços que devem ser adicionados ao inicio de cada linha
+         * @param s sinaliza se o valor que sera impresso esta a direita ou a esquerda do pai
+         * @param parentKey valor do pai
+         */
         void printTree(node* n, int space, char s, int parentKey);
 
 };
